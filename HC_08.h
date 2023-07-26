@@ -16,8 +16,8 @@ namespace HC_08namespace{
 			if (Serial2.available()) {
 				data = Serial2.readString();
 				HC_Flag = 1;
-				vTaskDelay(50);
 			}
+			vTaskDelay(50);
 		}
 	}
 	
@@ -25,7 +25,7 @@ namespace HC_08namespace{
 		public:
 			void HCInit(uint8_t RXD, uint8_t TXD){
 				Serial2.begin(9600, SERIAL_8N1, RXD, TXD);
-				xTaskCreatePinnedToCore(HCReceive, "HCReceive", 4096, NULL, 3, &xHandle, 1);
+				xTaskCreatePinnedToCore(HCReceive, "HCReceive", 4096, NULL, 1, &xHandle, 1);
 			}
 			/*uint8_t returnFlag(){
 				return HC_Flag;
